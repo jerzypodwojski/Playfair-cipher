@@ -47,7 +47,7 @@ def menu():
                 check_character = True
     return password, option, message
 
-
+# check the position of a character in 2d array
 def index_of(letter, matrix):
     for i in range(5):
         try:
@@ -88,21 +88,25 @@ def cipher_message(password, message):
     for i in range(round(len(message) / 2)):
         y1, x1 = index_of(message[2 * i], new_alphabet)
         y2, x2 = index_of(message[(2 * i) + 1], new_alphabet)
-
+        
+        # if the character 1 is the same as character 2. change second to an x and change the rows.
         if y1 == y2 and x1 == x2:
             message[(2 * i) + 1] = "x"
             y2, x2 = index_of(message[(2 * i) + 1], new_alphabet)
             message[(2 * i)] = new_alphabet[y1][x2]
             message[(2 * i) + 1] = new_alphabet[y2][x1]
             final_message += message[(2 * i)] + message[(2 * i) + 1]
+        # if the character 1 and character 2 dont have common row or column, change the rows.
         elif y1 != y2 and x1 != x2:
             message[(2 * i)] = new_alphabet[y1][x2]
             message[(2 * i) + 1] = new_alphabet[y2][x1]
             final_message += message[(2 * i)] + message[(2 * i) + 1]
+        # if the character 1 and character 2 have common column, move them once down.
         elif y1 == y2 and x1 != x2:
             message[(2 * i)] = new_alphabet[y1][(x1 + 1) % 5]
             message[(2 * i) + 1] = new_alphabet[y2][(x2 + 1) % 5]
             final_message += message[(2 * i)] + message[(2 * i) + 1]
+        # if the character 1 and character 2 have common row, move them once right.
         elif y1 != y2 and x1 == x2:
             message[(2 * i)] = new_alphabet[(y1 + 1) % 5][x1]
             message[(2 * i) + 1] = new_alphabet[(y2 + 1) % 5][x2]
@@ -112,7 +116,7 @@ def cipher_message(password, message):
 
     return final_message
 
-
+# decipher is the same as cipher function but in reverse.
 def decipher_message(password, message):
     new_alphabet = handle_new_alphabet(password)
     final_message = ""
