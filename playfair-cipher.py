@@ -93,24 +93,16 @@ def cipher_message(password, message):
         if y1 == y2 and x1 == x2:
             message[(2 * i) + 1] = "x"
             y2, x2 = index_of(message[(2 * i) + 1], new_alphabet)
-            message[(2 * i)] = new_alphabet[y1][x2]
-            message[(2 * i) + 1] = new_alphabet[y2][x1]
-            final_message += message[(2 * i)] + message[(2 * i) + 1]
+            final_message += new_alphabet[y1][x2] + new_alphabet[y2][x1]
         # if the character 1 and character 2 dont have common row or column, change the rows.
         elif y1 != y2 and x1 != x2:
-            message[(2 * i)] = new_alphabet[y1][x2]
-            message[(2 * i) + 1] = new_alphabet[y2][x1]
-            final_message += message[(2 * i)] + message[(2 * i) + 1]
+            final_message += new_alphabet[y1][x2] + new_alphabet[y2][x1]
         # if the character 1 and character 2 have common column, move them once down.
         elif y1 == y2 and x1 != x2:
-            message[(2 * i)] = new_alphabet[y1][(x1 + 1) % 5]
-            message[(2 * i) + 1] = new_alphabet[y2][(x2 + 1) % 5]
-            final_message += message[(2 * i)] + message[(2 * i) + 1]
+            final_message += new_alphabet[y1][(x1 + 1) % 5] + new_alphabet[y2][(x2 + 1) % 5]
         # if the character 1 and character 2 have common row, move them once right.
         elif y1 != y2 and x1 == x2:
-            message[(2 * i)] = new_alphabet[(y1 + 1) % 5][x1]
-            message[(2 * i) + 1] = new_alphabet[(y2 + 1) % 5][x2]
-            final_message += message[(2 * i)] + message[(2 * i) + 1]
+            final_message += new_alphabet[(y1 + 1) % 5][x1] + new_alphabet[(y2 + 1) % 5][x2]
         else:
             final_message += message[(2 * i)] + message[(2 * i) + 1]
 
@@ -131,17 +123,11 @@ def decipher_message(password, message):
         y2, x2 = index_of(message[(2 * i) + 1], new_alphabet)
 
         if y1 != y2 and x1 != x2:
-            message[(2 * i)] = new_alphabet[y1][x2]
-            message[(2 * i) + 1] = new_alphabet[y2][x1]
-            final_message += message[(2 * i)] + message[(2 * i) + 1]
+            final_message += new_alphabet[y1][x2] + new_alphabet[y2][x1]
         elif y1 == y2 and x1 != x2:
-            message[(2 * i)] = new_alphabet[y1][(x1 - 1) % 5]
-            message[(2 * i) + 1] = new_alphabet[y2][(x2 - 1) % 5]
-            final_message += message[(2 * i)] + message[(2 * i) + 1]
+            final_message += new_alphabet[y1][(x1 - 1) % 5] + new_alphabet[y2][(x2 - 1) % 5]
         elif y1 != y2 and x1 == x2:
-            message[(2 * i)] = new_alphabet[(y1 - 1) % 5][x1]
-            message[(2 * i) + 1] = new_alphabet[(y2 - 1) % 5][x2]
-            final_message += message[(2 * i)] + message[(2 * i) + 1]
+            final_message += new_alphabet[(y1 - 1) % 5][x1] + new_alphabet[(y2 - 1) % 5][x2]
         else:
             final_message += message[(2 * i)] + message[(2 * i) + 1]
 
