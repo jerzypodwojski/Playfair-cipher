@@ -8,7 +8,7 @@ def menu():
     while check_character:
         print("Enter the password")
         password = input()
-        password.lower()
+        password = password.lower()
         password = password.replace("j", "i")
         password = password.replace(" ", "")
 
@@ -33,7 +33,7 @@ def menu():
     while not check_character:
         print("Enter the message")
         message = input()
-        message.lower()
+        message = message.lower()
         message = message.replace("j", "i")
         message = message.replace(" ", "")
         if len(message) % 2 == 1:
